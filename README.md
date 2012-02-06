@@ -101,3 +101,4 @@ It is working for me right now for one of my legacy projects using this approach
 1. Assets are not automatically loaded but have to be copied over to the Symfony2 documentroot
 2. Compatibility is so far only confirmed with symfony 1.0
 3. It is currently only possible to load one symfony 1-app
+4. No session sharing at the moment
