@@ -2,7 +2,7 @@
     "name": "Ingewikkeld/WrapperBundle",
     "description": "A Symfony2 Bundle for wrapping legacy symfony 1 projects into your Symfony2 project",
     "keywords": ["Symfony2", "symfony", "symfony 1"],
-    "website": "https://github.com/Ingewikkeld/IngewikkeldWrapperBundle",
+    "homepage": "https://github.com/Ingewikkeld/IngewikkeldWrapperBundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,5 +13,9 @@
     ],
     "require": {
         "php": ">=5.3.0"
-    }
+    },
+    "autoload": {
+        "psr-0": { "Ingewikkeld\\WrapperBundle": "" }
+    },
+    "target-dir": "Ingewikkeld/WrapperBundle"
 }
