@@ -1,0 +1,10 @@
+services:
+    ingewikkeld_wrapper.sf1_context_proxy:
+        class: Ingewikkeld\WrapperBundle\Proxy\Sf1ContextProxy
+        arguments:
+            - @kernel
+            - %wrapper_legacypath%
+            - %wrapper_app%
+            - %wrapper_env%
+            - %wrapper_debug%
+            - %wrapper_version%
