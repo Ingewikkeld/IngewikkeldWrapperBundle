@@ -23,12 +23,9 @@ Installation is done in just a couple of steps:
 
 ### 1. Using composer
 
-Add the dependency to composer.json
-    "Ingewikkeld/WrapperBundle": "dev-master"
+Require the bundle
 
-And update the dependencies
-
-    $ php composer.phar update
+    $ composer require Ingewikkeld/WrapperBundle:dev-master
 
 ### 2. Download the bundle (if not using composer)
 
