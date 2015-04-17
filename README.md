@@ -12,15 +12,22 @@ IngewikkeldWrapperBundle works with a fallback route. All routes that are not ca
 
 Installation is done in just a couple of steps:
 
-1. Download the bundle
-2. Configure the autoloader
-3. Enable the bundle
-4. Configure your legacy project
-5. Copy your assets to the document root
-6. Configure your routing
-7. Refactor your project
+1. Using composer
+2. Download the bundle
+3. Configure the autoloader
+4. Enable the bundle
+5. Configure your legacy project
+6. Copy your assets to the document root
+7. Configure your routing
+8. Refactor your project
 
-### 1. Download the bundle
+### 1. Using composer
+
+Require the bundle
+
+    $ composer require Ingewikkeld/WrapperBundle:dev-master
+
+### 2. Download the bundle (if not using composer)
 
 Make sure the bundle is being placed in vendor/bundles/Ingewikkeld/IngewikkeldWrapperBundle. You can do this by using the vendors script, using submodules or downloading the zip file.
 
@@ -44,7 +51,7 @@ If you are using Git, you can also use submodules to install the bundle into you
 #### zip file
 Of course, you can just download the zip file from [Github](https://github.com/Ingewikkeld/IngewikkeldWrapperBundle). Unzip the file and copy the contents of the zip-file into the *vendor/bundles/Ingewikkeld/WrapperBundle* directory of your Symfony2 project.
 
-### 2. Configure the autoloader
+### 3. Configure the autoloader (if not using composer)
 
 Before the Ingewikkeld namespace can be loaded, we need to set up the autoloader to actually load the namespace. For this to work, you need to edit the *app/autoload.php* file. In the $loader->registerNamespaces() call, you need to add the Ingewikkeld namespace, like this:
 
@@ -53,7 +60,7 @@ Before the Ingewikkeld namespace can be loaded, we need to set up the autoloader
         'Ingewikkeld'      => __DIR__.'/../vendor/bundles',
     ));
 
-### 3. Enable the bundle
+### 4. Enable the bundle
 
 Enable the bundle in the AppKernel (*app/AppKernel.php*). In the registerBundles() method, add the WrapperBundle to the $bundles array:
 
@@ -61,21 +68,22 @@ Enable the bundle in the AppKernel (*app/AppKernel.php*). In the registerBundles
 			// ...
             new Ingewikkeld\WrapperBundle\IngewikkeldWrapperBundle(),
         );
-### 4. Configure your legacy project
+### 5. Configure your legacy project
 
 Put your legacy project in your *app/* directory. For my first project, I put my whole project into the *app/legacy/* directory. Now, add some configuration values to *app/config/config.yml* to set up the WrapperBundle to serve pages from your legacy symfony 1 project:
 
     parameters:
         wrapper_legacypath: legacy # directory inside app/ where your project is located
         wrapper_app: frontend # app to load
-        wrapper_env: prod #environment to load
-        wrapper_debug: false #whether debug is on or not
+        wrapper_env: prod # environment to load
+        wrapper_debug: false # whether debug is on or not
+        wrapper_version: 1.4 # Symfony version of the legacy project you are wrapping in this bundle 
 
-### 5. Copy your assets to the document root
+### 6. Copy your assets to the document root
 
 All files that need to be available in the document root need to be copied there from your legacy project. Right now, those are not yet automatically loaded (see "Known issues"), so they have to be copied over to the *web/* directory of your Symfony2 project. Usually, you copy over the images/, css/, js/ and uploads/ directories.
 
-### 6. Configure your routing
+### 7. Configure your routing
 
 At the bottom of your *app/config/routing.yml* file, add the following:
 
@@ -86,7 +94,7 @@ IngewikkeldWrapperBundle:
 
 This will ensure the wrapper route will catch all requests that are not caught by any other route.
 
-### 7. Refactor your project
+### 8. Refactor your project
 
 Now, start refactoring and porting your legacy project into Symfony2 code. 
 
@@ -102,3 +110,7 @@ It is working for me right now for one of my legacy projects using this approach
 2. Compatibility is so far only confirmed with symfony 1.0
 3. It is currently only possible to load one symfony 1-app
 4. No session sharing at the moment
+
+## Addendum:
+
+1. Symfony 1.4 support is confirmed but with Swiftmailer conflicts. Either remove the Swiftmailer line from composer.json and update deps (easier method) or remove the legacy version.
